@@ -139,6 +139,9 @@ def get_data_ML(args):
     test = sample_outliers(test, args.outlier)
     train = train[train.classALeRCE!=args.outlier]
 
+    # SID CUSTOM
+    train_classes = train.classALeRCE.values
+
     feature_preprocessor = HandcraftedFeaturePreprocessor()
     train = feature_preprocessor.preprocess(train[feature_list]).values
     test_features = feature_preprocessor.preprocess(test[feature_list]).values
@@ -146,4 +149,4 @@ def get_data_ML(args):
     test_labels = np.where((test['classALeRCE']!= args.outlier), 0, test['classALeRCE'])
     test_labels = np.where(test['classALeRCE']==args.outlier, 1, test_labels)
     test_labels = test_labels.reshape(-1,).astype('int8')
-    return train, test_features, test_labels
+    return train, train_classes, test_features, test_labels
