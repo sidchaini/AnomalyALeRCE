@@ -4,7 +4,6 @@ torch==2.0.1
 matplotlib
 numpy
 cython
-pyarrow==0.15.1
 tensorboard>=2.2.0
 tensorflow==2.2.0
 pyarrow
