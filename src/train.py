@@ -61,7 +61,8 @@ def train_ML(args, dataloader_train):
         clf = IsolationForest(n_estimators=100, max_samples=256, contamination=0.001).fit(dataloader_train)
     else: clf = OneClassSVM(kernel='rbf', nu=0.01).fit(dataloader_train)
     pickle.dump(clf, open('{}/model.pkl'.format(args.directory), 'wb'))
-    
+    with open(f'{args.directory}/dataloader_train.pkl', 'wb') as f:
+        pickle.dump(dataloader_train, f)
     return clf
 
 
