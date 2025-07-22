@@ -26,10 +26,10 @@ def launch_job(args):
 
     if args.model in ['iforest','ocsvm']:
         print("getting data now...")
-        dataloader_train, test_features, test_labels = get_data_ML(args)
+        dataloader_train, train_classes, test_features, test_labels = get_data_ML(args)
         print("got data success!")
         print("training now...")
-        clf = train_ML(args, dataloader_train)
+        clf = train_ML(args, [dataloader_train,train_classes])
         print("training success!")
         print("testing now...")
         test_ML(args, clf, test_features, test_labels)
