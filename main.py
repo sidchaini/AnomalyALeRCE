@@ -25,9 +25,15 @@ def launch_job(args):
         os.makedirs(args.directory)
 
     if args.model in ['iforest','ocsvm']:
+        print("getting data now...")
         dataloader_train, test_features, test_labels = get_data_ML(args)
+        print("got data success!")
+        print("training now...")
         clf = train_ML(args, dataloader_train)
+        print("training success!")
+        print("testing now...")
         test_ML(args, clf, test_features, test_labels)
+        print("testing success!")
     else:
         writer = SummaryWriter(args.directory)
         dataloader_train, dataloader_val, dataloader_test = get_data(args)
