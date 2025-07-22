@@ -64,8 +64,6 @@ def train_ML(args, dataloader_train):
         dataloader_train_only, train_classes = dataloader_train
         clf = OneClassSVM(kernel='rbf', nu=0.01).fit(dataloader_train_only)
     pickle.dump(clf, open('{}/model.pkl'.format(args.directory), 'wb'))
-    with open(f'{args.directory}/dataloader_train.pkl', 'wb') as f:
-        pickle.dump(dataloader_train_only, f)
     return clf
 
 
