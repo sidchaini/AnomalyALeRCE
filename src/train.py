@@ -58,11 +58,14 @@ def train(args, writer, dataloader_train, dataloader_val):
 
 def train_ML(args, dataloader_train):
     if args.model == 'iforest':
-        clf = IsolationForest(n_estimators=100, max_samples=256, contamination=0.001).fit(dataloader_train)
-    else: clf = OneClassSVM(kernel='rbf', nu=0.01).fit(dataloader_train)
+        dataloader_train_only, train_classes = dataloader_train
+        clf = IsolationForest(n_estimators=100, max_samples=256, contamination=0.001).fit(dataloader_train_only)
+    else: 
+        dataloader_train_only, train_classes = dataloader_train
+        clf = OneClassSVM(kernel='rbf', nu=0.01).fit(dataloader_train_only)
     pickle.dump(clf, open('{}/model.pkl'.format(args.directory), 'wb'))
     with open(f'{args.directory}/dataloader_train.pkl', 'wb') as f:
-        pickle.dump(dataloader_train, f)
+        pickle.dump(dataloader_train_only, f)
     return clf
 
 
