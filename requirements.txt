@@ -5,6 +5,6 @@ matplotlib
 numpy
 cython
 pyarrow==0.15.1
-tensorboard==1.14.0
+tensorboard>=2.2.0
 tensorflow==2.2.0
 pyarrow
